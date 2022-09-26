@@ -15,12 +15,10 @@ public class Lesson03Quiz03RestController {
 	
 	@RequestMapping("/lesson03/quiz03")
 	public String quiz03(
-			@RequestParam("id") int id,
-			@RequestParam("price") int price,
-			@RequestParam("type") String type
+			@RequestParam(value="id") int id,
+			@RequestParam(value="price") int price
 			) {
-		type = "전세";
-		int row = realEstateBO.updateRealEstateById(id, price, type) ; 
+		int row = realEstateBO.updateRealEstateById(id, price, "전세") ; 
 		return "수정성공" + row;
 	}
 }
