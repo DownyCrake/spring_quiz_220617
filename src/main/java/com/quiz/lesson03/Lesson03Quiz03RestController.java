@@ -16,9 +16,10 @@ public class Lesson03Quiz03RestController {
 	@RequestMapping("/lesson03/quiz03")
 	public String quiz03(
 			@RequestParam(value="id") int id,
-			@RequestParam(value="price") int price
+			@RequestParam(value="price") int price,
+			@RequestParam(value="type") String type
 			) {
-		int row = realEstateBO.updateRealEstateById(id, price, "전세") ; 
+		int row = realEstateBO.updateRealEstateById(id, price, type) ; 
 		return "수정성공" + row;
 	}
 }

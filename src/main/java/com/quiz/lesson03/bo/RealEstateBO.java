@@ -43,4 +43,7 @@ public class RealEstateBO {
 		return realEstateDAO.updateRealEstateById(id, price, type);
 	}
 	
+	public int deleteRealEstateById(int id) {
+		return realEstateDAO.deleteRealEstateById(id);
+	}
 }
