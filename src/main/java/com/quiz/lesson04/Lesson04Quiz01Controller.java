@@ -26,7 +26,7 @@ public class Lesson04Quiz01Controller {
 	@PostMapping(path = "/add_seller")
 	public String addSeller(
 			@RequestParam(value = "nickname") String nickname,
-			@RequestParam(value = "profileImageUrl") String profileImageUrl,
+			@RequestParam(value = "profileImageUrl", required = false) String profileImageUrl,
 			@RequestParam(value = "temperature") double temperature
 			) {
 		sellerBO.addSeller(nickname, profileImageUrl, temperature);
