@@ -181,16 +181,31 @@ public class Lesson05Controller {
 	@Autowired
 	private WeatherHistoryBO weatherHistoryBO;
 	
-	@RequestMapping("/quiz05")
-	public String quiz05(
+	@RequestMapping("/quiz05/1")
+	public String quiz05_1(
+			@ModelAttribute WeatherHistory weather,
+			
 			Model model) {
+		
+		// insert
+		weatherHistoryBO.addWeather(weather);
+		
+		// select
 		List<WeatherHistory> weatherHistory = new ArrayList<>();
 		
 		weatherHistory = weatherHistoryBO.getWeatherHistory();
+		
 		
 		model.addAttribute("weatherHistory", weatherHistory);
 		
 		return "lesson05/weatherHistory";
 	}
+	
+	@RequestMapping("/quiz05/2")
+	public String quiz05_2() {
+		
+		return "lesson05/weatherUpload";
+	}
+	
 
 }
