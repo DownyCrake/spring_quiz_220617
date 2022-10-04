@@ -183,18 +183,12 @@ public class Lesson05Controller {
 	
 	@RequestMapping("/quiz05/1")
 	public String quiz05_1(
-			@ModelAttribute WeatherHistory weather,
-			
 			Model model) {
-		
-		// insert
-		weatherHistoryBO.addWeather(weather);
 		
 		// select
 		List<WeatherHistory> weatherHistory = new ArrayList<>();
 		
 		weatherHistory = weatherHistoryBO.getWeatherHistory();
-		
 		
 		model.addAttribute("weatherHistory", weatherHistory);
 		
@@ -205,6 +199,15 @@ public class Lesson05Controller {
 	public String quiz05_2() {
 		
 		return "lesson05/weatherUpload";
+	}
+	
+	@RequestMapping("/quiz05/add")
+	public String quiz05_add(
+		@ModelAttribute WeatherHistory weather
+	) {
+		// insert
+		weatherHistoryBO.addWeather(weather);
+		return "redirect:/lesson05/quiz05/1";
 	}
 	
 

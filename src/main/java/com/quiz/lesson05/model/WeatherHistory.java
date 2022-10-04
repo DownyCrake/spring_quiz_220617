@@ -2,8 +2,11 @@ package com.quiz.lesson05.model;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class WeatherHistory {
 
+	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date date;
 	private String weather;
 	private double temperatures;
@@ -13,6 +16,14 @@ public class WeatherHistory {
 	private Date createdAt;
 	private Date updatedAt;
 	
+	
+	private int id;
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	public Date getDate() {
 		return date;
 	}

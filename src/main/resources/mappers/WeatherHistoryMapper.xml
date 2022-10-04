@@ -34,11 +34,11 @@
  	VALUES
  		(
  		 #{date}
-		, `weather`
-		, `temperatures`
-		, `precipitation`
-		, `microDust`
-		, `windSpeed`
+		, #{weather}
+		, #{temperatures}
+		, #{precipitation}
+		, #{microDust}
+		, #{windSpeed}
 		, NOW()
 		, NOW()
  		

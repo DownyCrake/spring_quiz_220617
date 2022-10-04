@@ -34,8 +34,8 @@ nav {background-color: #78A9ED	}
 			<div>
 				<ul class="nav flex-column ">
 					<h5>
-					<li class="nav-item font-weight-bold"> <a href="#" class="nav-link text-white">날씨</a></li>
-					<li class="nav-item font-weight-bold"> <a href="#" class="nav-link text-white">날씨입력</a></li>
+					<li class="nav-item font-weight-bold"> <a href="/lesson05/quiz05/1" class="nav-link text-white">날씨</a></li>
+					<li class="nav-item font-weight-bold"> <a href="/lesson05/quiz05/2" class="nav-link text-white">날씨입력</a></li>
 					<li class="nav-item font-weight-bold"> <a href="#" class="nav-link text-white">테마날씨</a></li>
 					<li class="nav-item font-weight-bold"> <a href="#" class="nav-link text-white">관측기후</a></li>
 					</h5>
