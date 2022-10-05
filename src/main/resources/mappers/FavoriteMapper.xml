@@ -27,7 +27,6 @@
  		,`url`
  	FROM
  		`favorite`
- 	ORDER BY `id`
  
  </select>
  

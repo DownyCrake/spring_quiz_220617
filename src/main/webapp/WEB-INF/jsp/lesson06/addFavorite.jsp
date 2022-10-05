@@ -1,8 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <!DOCTYPE html>
 <html>
@@ -10,11 +7,10 @@
 <meta charset="UTF-8">
 <title>즐겨찾기 추가</title>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.js" integrity="sha512-CX7sDOp7UTAq+i1FYIlf9Uo27x4os+kGeoT7rgwvY+4dmjqV0IuE/Bl5hVsjnQPQiTOhAX1O2r2j5bjsFBvv/A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-	
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
 </head>
@@ -36,8 +32,7 @@
 <script>
 $(document).ready(function(){
 	
-	$('#addBtn').on('click', function(e){
-		e.preventDefault();
+	$('#addBtn').on('click', function(){
 
 		let name = $('#name').val().trim();
 		if (name.length < 1) {
@@ -50,29 +45,34 @@ $(document).ready(function(){
 			return;
 		}
 		
+		if (url.startsWith("http")==false && url.startsWith("https")==false){
+			alert("주소 형식이 잘못되었습니다.")
+			return;
+		}
 		
+		// 서버에 인서트 요청 AJAX
 		$.ajax({
+			//request
 			type:"post"
-			,url:"/lesson06/quiz01/add_favorite"
-			,data:{"name":name, "url":url}
+			, url:"/lesson06/quiz01/add_favorite"
+			, data:{"name":name,"url":url}
 		
+			//response
 			,success:function(data){
 				if (data == "success") {
 					location.href = "/lesson06/quiz01/add_favorite"
+				} else {
+					alert("입력 실패");
 				}
 			}
 			
-			,error:function(e){
-				alert("error:" +e);
+			,error:function(request, status, error){
+				alert("error");
 			}
 			
 		});
 		
 	});
-	
-	
-	
-	
 	
 });
 </script>
