@@ -22,7 +22,7 @@
 <body>
 <div class="container">
 	<h1><b>즐겨 찾기 목록</b></h1>
-	<table class="table">
+	<table class="table text-center font-weight-bold">
 		<thead>
 			<tr>
 				<th>No.</th>
@@ -31,16 +31,33 @@
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach items="favorites" var="favorite" varStatus="status">
+			<c:forEach items="${favorites}" var="favorite" varStatus="status">
 				<tr>
+					<td>${status.count}</td>
+					<td>${favorite.name }</td>
+					<td>${favorite.url }</td>
 					<td>
-					${status.count}
+						<button type="button" class="btn btn-danger" id="delete${favorite.id}">삭제</button>
 					</td>
-							
 				</tr>
 			</c:forEach>
 		</tbody>
 	</table>
 </div>
+
+<script>
+$(document).ready(function(){     
+	$('#delete${favorite.id}').on('click',function(){
+		alert(${favorite.id});
+		
+		
+		
+		
+	
+	}); //click
+}); //document
+
+</script>
+
 </body>
 </html>

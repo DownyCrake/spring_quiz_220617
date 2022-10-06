@@ -1,7 +1,9 @@
 package com.quiz.lesson06;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -45,4 +47,16 @@ public class Lesson06Quiz01Controller {
 		
 		return "lesson06/favoriteList";
 	}
+	
+	@ResponseBody
+	@RequestMapping("url_duplication")
+	public Map<String, Boolean> isDuplication(
+			@RequestParam("url") String url
+			){
+		Map<String, Boolean> result = new HashMap<>();
+		Boolean isDuplication = favoriteBO.existFavoriteByUrl(url);
+		result.put("dupl", isDuplication);
+		return result;
+	}
+	
 }

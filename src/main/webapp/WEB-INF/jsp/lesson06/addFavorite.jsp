@@ -17,24 +17,65 @@
 <body>
 <div class="container">
 	<h1>즐겨찾기 추가</h1>
-	<form method="post" action="/lesson06/quiz01/add_favorite">
+	
 	<div class="form-group">
 		<label for="name">제목</label>
 		<input type="text" id="name" name="name" class="form-control">
 	</div>
+	
 	<div class="form-group">
 		<label for="url">주소</label>
-		<input type="text" id="url" name="url" class="form-control">
+		<div class="d-flex">
+			<input type="text" id="url" name="url" class="form-control">
+			<button type="button" class="btn btn-info" id="urlCheckBtn">중복확인</button>
+		</div>
+		
+		<small class="text-danger d-none" id="isDuplicationText">중복된 url입니다.</small>
+		<small class="text-success d-none" id="availableText">저장가능한 url입니다.</small>
+		
 	</div>
-	<button type="button" id="addBtn" class="btn btn-info btn-block">추가</button>
+	<button type="button" id="addBtn" class="btn btn-success btn-block">추가</button>
 	
-	</form>
 
 </div>
 
 <script>
 
 $(document).ready(function(){
+	
+	$('#urlCheckBtn').on('click',function(){
+		$('#urlCheckArea').empty();
+		
+		let url = $('#url').val().trim();
+		if (url.length < 1 ){
+			alert("url이 비어있습니다");
+		}
+		
+		$.ajax({
+			//request
+			type:"post"
+			, url: "/lesson06/quiz01/url_duplication"
+			, data: {"url":url}
+			//response
+			, success:function(data){  // json string => object화 (jqery ajax 함수가 파싱해줌)
+				if (data.dupl){
+					//count1 이상 > 중복
+					$('#isDuplicationText').removeClass('d-none');
+					$('#availableText').addClass('d-none');
+				} else {
+					//사용가능
+					$('#availableText').removeClass('d-none');
+					$('#isDuplicationText').addClass('d-none');
+				}
+			}
+			,error:function(e){
+				alert("중복 확인 실패");
+			}
+			
+		});//ajax
+	}); //click 
+	
+	
 	
 	$('#addBtn').on('click', function(){
 
@@ -53,6 +94,13 @@ $(document).ready(function(){
 			alert("주소 형식이 잘못되었습니다.")
 			return;
 		}
+		
+		
+		if ($('#availableText').hasClass('d-none')){
+			alert("중복된 url입니다");
+			return;
+		}
+		
 		
 		// 서버에 인서트 요청 AJAX
 		$.ajax({

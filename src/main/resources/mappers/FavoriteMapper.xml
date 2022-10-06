@@ -23,10 +23,21 @@
  
  <select id="selectFavorite" resultType="com.quiz.lesson06.model.Favorite">
  	SELECT
- 		`name`
+ 		`id`
+ 		,`name`
  		,`url`
  	FROM
  		`favorite`
+ 
+ </select>
+ 								
+ <select id="existFavoriteByUrl" parameterType="String" resultType="boolean">
+ 	SELECT
+ 		COUNT(1)
+ 	FROM
+ 		`favorite`
+ 	WHERE
+ 		`url` = #{url}
  
  </select>
  
