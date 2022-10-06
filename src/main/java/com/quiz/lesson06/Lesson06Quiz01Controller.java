@@ -26,8 +26,8 @@ public class Lesson06Quiz01Controller {
 		return "lesson06/addFavorite";
 	}
 	
-	@ResponseBody
 	@PostMapping("/add_favorite")
+	@ResponseBody
 	public String addFavorite(
 			@RequestParam("name") String name,
 			@RequestParam("url") String url

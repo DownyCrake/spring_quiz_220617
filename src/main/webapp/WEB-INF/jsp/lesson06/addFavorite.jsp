@@ -16,20 +16,24 @@
 </head>
 <body>
 <div class="container">
-	<h1>즐겨찾기 추가하기</h1>
-		<div class="form-group">
-			<label for="name" >제목</label>
-			<input type="text" id="name" name="name" class="form-control">
-		</div>
-		<div class="form-group">
-			<label for="url">주소</label>
-			<input type="text" id="url" name="url" class="form-control">
-		</div>
-		<button type="button" id="addBtn" class="btn btn-success w-100">추가</button>
+	<h1>즐겨찾기 추가</h1>
+	<form method="post" action="/lesson06/quiz01/add_favorite">
+	<div class="form-group">
+		<label for="name">제목</label>
+		<input type="text" id="name" name="name" class="form-control">
+	</div>
+	<div class="form-group">
+		<label for="url">주소</label>
+		<input type="text" id="url" name="url" class="form-control">
+	</div>
+	<button type="button" id="addBtn" class="btn btn-info btn-block">추가</button>
 	
+	</form>
+
 </div>
 
 <script>
+
 $(document).ready(function(){
 	
 	$('#addBtn').on('click', function(){
@@ -53,14 +57,14 @@ $(document).ready(function(){
 		// 서버에 인서트 요청 AJAX
 		$.ajax({
 			//request
-			type:"post"
+			type:"POST"
 			, url:"/lesson06/quiz01/add_favorite"
 			, data:{"name":name,"url":url}
 		
 			//response
 			,success:function(data){
 				if (data == "success") {
-					location.href = "/lesson06/quiz01/add_favorite"
+					location.href = "/lesson06/quiz01/favorite_list_view"
 				} else {
 					alert("입력 실패");
 				}
@@ -76,6 +80,5 @@ $(document).ready(function(){
 	
 });
 </script>
-
 </body>
 </html>
