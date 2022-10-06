@@ -49,7 +49,7 @@ public class Lesson06Quiz01Controller {
 	}
 	
 	@ResponseBody
-	@RequestMapping("url_duplication")
+	@RequestMapping("/url_duplication")
 	public Map<String, Boolean> isDuplication(
 			@RequestParam("url") String url
 			){
@@ -57,6 +57,14 @@ public class Lesson06Quiz01Controller {
 		Boolean isDuplication = favoriteBO.existFavoriteByUrl(url);
 		result.put("dupl", isDuplication);
 		return result;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/delete_favorite")
+	public String deleteFavorite(
+			@RequestParam("id") int id) {
+		favoriteBO.deleteFavorite(id);
+		return "deleted";
 	}
 	
 }

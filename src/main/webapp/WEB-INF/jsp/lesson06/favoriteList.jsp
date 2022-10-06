@@ -37,7 +37,7 @@
 					<td>${favorite.name }</td>
 					<td>${favorite.url }</td>
 					<td>
-						<button type="button" class="btn btn-danger" id="delete${favorite.id}">삭제</button>
+						<button type="button" class="btn btn-danger deleteBtn" value="${favorite.id}">삭제</button>
 					</td>
 				</tr>
 			</c:forEach>
@@ -47,11 +47,25 @@
 
 <script>
 $(document).ready(function(){     
-	$('#delete${favorite.id}').on('click',function(){
-		alert(${favorite.id});
+	$('.deleteBtn').on('click',function(){
+		let id = $(this).val();
+		// alert(id);
 		
-		
-		
+		$.ajax({
+			//request
+			type:"post"
+			, url:"/lesson06/quiz01/delete_favorite"
+			, data:{"id":id}
+			//response
+			,success:function(data){
+				if (data == "deleted"){
+				alert(data); }
+			}
+			,error:function(e){
+				alert("삭제 실패");
+			}
+			
+		});//ajax
 		
 	
 	}); //click
