@@ -18,6 +18,6 @@ public interface FavoriteDAO {
 	
 	public boolean existFavoriteByUrl(String url);
 	
-	public void deleteFavorite(int id);
+	public int deleteFavorite(int id);
 
 }

@@ -61,10 +61,21 @@ public class Lesson06Quiz01Controller {
 	
 	@ResponseBody
 	@RequestMapping("/delete_favorite")
-	public String deleteFavorite(
+	public Map<String,Object> deleteFavorite(
 			@RequestParam("id") int id) {
-		favoriteBO.deleteFavorite(id);
-		return "deleted";
+		Map<String, Object> result = new HashMap<>();
+		
+		int deleteRow = favoriteBO.deleteFavorite(id);;
+		
+		if (deleteRow > 0) {
+			result.put("code", 100);
+			result.put("result", "성공");
+		}else {
+			result.put("code", 500);
+			result.put("errorMessage", "삭제에 실패하였습니다");
+		}
+		
+		return result;
 	}
 	
 }
