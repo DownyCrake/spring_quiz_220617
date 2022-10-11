@@ -28,6 +28,8 @@ footer {height: 100px;}
 .radioSection {height: 50px;}
 .nav-link {color:white;}
 .nav-link:hover {color: rgb(30, 13, 1);}
+.logo {color:black;}
+.logo:hover {color:black;}
 
 </style>
 
@@ -36,7 +38,9 @@ footer {height: 100px;}
     <div id="wrap">
         <header class="d-flex justify-content-center">
             <div id="title" class="d-flex align-items-center">
-                <h1>통나무 팬션</h1>
+                <a href="/lesson06/quiz03/main_view">
+               <h1 class="logo">통나무 팬션</h1>
+                </a>
             </div>
         </header>
         <nav>
@@ -48,10 +52,10 @@ footer {height: 100px;}
                     <a href="#" class="nav-link ">객실보기</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link ">예약하기</a>
+                    <a href="/lesson06/quiz03/booking_view" class="nav-link ">예약하기</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">예약목록</a>
+                    <a href="/lesson06/quiz03/list_view" class="nav-link">예약목록</a>
                 </li>
             </ul>
         </nav>
@@ -92,7 +96,7 @@ footer {height: 100px;}
 								</c:when>
 							</c:choose>
 							</td>
-							<td><button type="button" class="btn btn-danger">삭제</button></td>
+							<td><button type="button" class="btn btn-danger del-btn" data-booking-id="${list.id}">삭제</button></td>
 							
 						</tr>
 						</c:forEach> 					
@@ -110,8 +114,44 @@ footer {height: 100px;}
             </div>
         </footer>
 
-
-
     </div>
+    
+<script>
+
+$(document).ready(function(){
+	
+	$('.del-btn').on('click', function(){
+		
+		let bookId = $(this).data('booking-id');
+		alert(bookId);
+		
+		$.ajax({
+			//request
+			type:"delete"
+			, url:"/lesson06/quiz03/delete_booking"
+			, data: {"id":bookId}
+			//response
+			, success:function(data){
+				if (data == "delete") {
+					location.reload(true);
+					alert("삭제성공");
+				}else {
+					alert("삭제 실패");
+				}
+			}
+			, error:function(request, status, error){
+				alert("에러");
+			}
+		}); //ajax
+		
+	});//click
+	
+}); //ready
+
+
+
+
+</script>    
+    
 </body>
 </html>
