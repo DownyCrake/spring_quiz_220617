@@ -34,6 +34,8 @@ footer {height: 100px;}
 #booking-form {width: 500px;}
 .logo {color:black;}
 .logo:hover {color:black;}
+a:hover { text-decoration:none !important }
+
 
 </style>
 

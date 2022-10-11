@@ -30,6 +30,7 @@ footer {height: 100px;}
 .nav-link:hover {color: rgb(30, 13, 1);}
 .logo {color:black;}
 .logo:hover {color:black;}
+a:hover { text-decoration:none !important }
 
 </style>
 
