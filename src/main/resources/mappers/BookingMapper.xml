@@ -27,6 +27,7 @@
 	, day
 	, date
 	, phoneNumber
+	, state
 	, createdAt
 	, updatedAt
 	)
@@ -37,6 +38,7 @@
 	, #{day}
 	, #{date}
 	, #{phoneNumber}
+	, '대기중'
 	, NOW()
 	, NOW()
 	)
@@ -48,5 +50,23 @@
  	WHERE 
  		`id` = #{id}
  </delete>
+ 
+ <select id="selectBookListByNameAndPhone" parameterType="Map" resultType="com.quiz.lesson06.model.Booking">
+ 		SELECT
+ 		`id`
+		,`name`
+		,`headcount`
+		,`day`
+		,`date`
+		,`phoneNumber`
+		,`state`
+		,`createdAt`
+		,`updatedAt`
+ 	FROM
+ 		`booking`
+ 	WHERE
+ 		`name` = #{name} and `phoneNumber` = #{phoneNumber}
+ 
+ </select>
  
  </mapper>

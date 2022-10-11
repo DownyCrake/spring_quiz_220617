@@ -2,7 +2,9 @@ package com.quiz.lesson06;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -59,8 +61,25 @@ public class Lesson06quiz03Controller {
 	}
 	
 	
+	@ResponseBody
+	@RequestMapping("search_booking")
 	
-	
+//	public Booking selectBookingByNameAndPhone(
+	public Map<String, Object> selectBookingByNameAndPhone(
+			@RequestParam("name") String name,
+			@RequestParam("phoneNumber") String phoneNumber
+			) {
+		Booking booking = bookingBO.getBookListByNameAndPhone(name, phoneNumber);
+		Map<String, Object> result = new HashMap<>();
+		if (booking != null) {
+			result.put("code", 100);
+			result.put("booking", booking);
+		}else {
+			result.put("code", 400 ); //데이터 없음
+		}
+		
+		return result;
+	}
 	
 	
 	@RequestMapping("/main_view")

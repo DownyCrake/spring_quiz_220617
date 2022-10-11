@@ -37,6 +37,8 @@ footer {height: 100px;}
 .radioSection {height: 50px;}
 .nav-link {color:white;}
 .nav-link:hover {color: rgb(30, 13, 1);}
+.logo {color:black;}
+.logo:hover {color:black;}
 
 </style>
 
@@ -47,7 +49,9 @@ footer {height: 100px;}
     <div id="wrap">
         <header class="d-flex justify-content-center">
             <div id="title" class="d-flex align-items-center">
-                <h1>통나무 팬션</h1>
+                <a href="/lesson06/quiz03/main_view">
+               <h1 class="logo">통나무 팬션</h1>
+                </a>
             </div>
         </header>
         <nav>
@@ -120,25 +124,29 @@ footer {height: 100px;}
 
     <script>
         $(document).ready(function () {
-            /////////////////////////////////////////
-            let images = ["/img/test06_banner1.jpg", "/img/test06_banner2.jpg", "/img/test06_banner3.jpg", "/img/test06_banner4.jpg"];
+			
+        	// 이미지 순환
+        	let images = ["/img/test06_banner1.jpg", "/img/test06_banner2.jpg", "/img/test06_banner3.jpg", "/img/test06_banner4.jpg"];
             let imgNum = 1;
-            function changeImg() {
+            setInterval(function changeImg() {    // (함수명, 밀리세컨)
                 $("#mainBanner").attr("src", images[imgNum]);
                 imgNum++;
-                if (imgNum > 3 ) {
+                if (imgNum >= images.length ) {
                     imgNum = 0;
                 }
             }
-            setInterval(changeImg, 3000);
-
-
+            		, 3000); 
+			//
+			
+			// 데이트피커
             $.datepicker.setDefaults({
                 dateFormat: "yy년 mm월 dd일",
                 minDate: 0
             });
             $("#datepicker").datepicker();
-
+			//
+			
+			//클릭
             $("#lookUp").on("click", function () {
             		let name = $('#name').val().trim();
                     if (name == "") {
@@ -150,30 +158,33 @@ footer {height: 100px;}
                         alert("전화번호를 입력하세요.");
                         return;
                     }
-                    alert(name);
+                    // alert(name);
 
                     $.ajax({
 						type:"post"
 						, url:"/lesson06/quiz03/search_booking"
                     	, data: {"name":name, "phoneNumber":phoneNumber}
+                    	, dataType: "JSON"
                     
-                    	,success:function(e){
-                    		if(e == "success"){
-                    			alert("");
+                    	,success:function(data){
+                    		if(data.code == 100){
+                    			alert("이름 : " + data.booking.name 
+                    					+ "\n날짜 : " + data.booking.date.substr(0,10)
+                    					+ "\n일수 : " + data.booking.day 
+                    					+ "\n인원 : "+ data.booking.headcount
+                    					+ "\n상태 : "+ data.booking.state);
                     		}
                     		else{
-                    			alert("실패");
+                    			alert("예약 내역이 없습니다");
                     		}
+                    	
                     	}
             			, error:function(request, status, error){
-            				alert("에러");
+            				alert("조회에 실패했습니다");
             			}
                     });//ajax
                     
             });
-
-
-            /////////////////////////////////////////
         });
     </script>
 

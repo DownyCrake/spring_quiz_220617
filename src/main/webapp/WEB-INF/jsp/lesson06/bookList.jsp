@@ -123,7 +123,7 @@ $(document).ready(function(){
 	$('.del-btn').on('click', function(){
 		
 		let bookId = $(this).data('booking-id');
-		alert(bookId);
+		alert("id:" + bookId);
 		
 		$.ajax({
 			//request

@@ -2,12 +2,15 @@ package com.quiz.lesson06.model;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class Booking {
 
 	private int id;
 	private String name;
 	private int headcount;
 	private int day;
+	//@JsonFormat(pattern="yyyy-MM-dd")
 	private Date date;
 	private String phoneNumber;
 	private String state;

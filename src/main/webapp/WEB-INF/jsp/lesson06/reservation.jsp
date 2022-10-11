@@ -148,10 +148,10 @@ $(document).ready(function(){
 			alert("전화번호를 입력하세요");
 			return;
 		}
-		alert(date);
+		//alert(date);
 
 		//AJAX
-		$.ajax({
+			$.ajax({
 			//request
 			type:"post"
 			, url:"/lesson06/quiz03/add_booking"
